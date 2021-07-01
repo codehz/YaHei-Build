@@ -1,4 +1,4 @@
-name: Build Microsoft YaHei from Sarasa-Gothic
+name: build msyh
 on: [push]
 
 jobs:
