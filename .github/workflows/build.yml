@@ -7,9 +7,9 @@ jobs:
     container: voidlinux/voidlinux:latest
     steps:
     - name: Install dependencies
-      run: xbps-install -Syu git fontforge wget 7zip
+      run: xbps-install -Syu git fontforge wget p7zip
     - uses: actions/checkout@v2
     - name: Download font
       run: wget -o /tmp/ttc.7z  https://github.com/be5invis/Sarasa-Gothic/releases/download/v0.32.9/sarasa-gothic-ttc-0.32.9.7z
     - name: Extract font
-      run: 7z e /tmp/ttc.7z -o data
+      run: 7z x -odata /tmp/ttc.7z
