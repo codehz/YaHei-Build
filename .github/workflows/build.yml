@@ -17,3 +17,8 @@ jobs:
       run: |
         mkdir out
         python3 extract.py
+    - name: Upload
+      uses: actions/upload-artifact@v2
+      with:
+        name: out
+        path: out
