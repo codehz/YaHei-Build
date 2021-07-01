@@ -1,0 +1,10 @@
+name: Build Microsoft YaHei from Sarasa-Gothic
+on: [push]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    container: voidlinux/voidlinux:latest
+    steps:
+    - name: Install dependencies
+      run: xbps-install -y git nodejs otfcc ttfautohint
