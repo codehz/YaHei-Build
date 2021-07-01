@@ -7,6 +7,6 @@ jobs:
     container: voidlinux/voidlinux:latest
     steps:
     - name: Install dependencies
-      run: xbps-install -Syu git nodejs otfcc ttfautohint python3
+      run: xbps-install -Syu git nodejs otfcc ttfautohint python3-pip
     - name: Install afdko
       run: pip3 install --user afdko
