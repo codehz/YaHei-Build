@@ -7,17 +7,9 @@ jobs:
     container: voidlinux/voidlinux:latest
     steps:
     - name: Install dependencies
-      run: xbps-install -Syu git nodejs otfcc ttfautohint python3-pip
-    - name: Install afdko
-      run: pip3 install --user afdko
-    - name: Clone sarasa gothic
-      uses: actions/checkout@v2
-      with:
-        repository: be5invis/Sarasa-Gothic
-        ref: "13a1edfa1cae803600a6980b1b5fa68be157c003"
-    - name: npm install
-      run: npm install
-    - name: build ttc
-      run: |
-        npm i -g verda
-        verda -f verdafile.js ttf || cat .build/.verda-build-journal
+      run: xbps-install -Syu git fontforge wget 7z
+    - uses: actions/checkout@v2
+    - name: Download font
+      run: wget -o /tmp/ttc.7z  https://github.com/be5invis/Sarasa-Gothic/releases/download/v0.32.9/sarasa-gothic-ttc-0.32.9.7z
+    - name: Extract font
+      run: 7z e /tmp/ttc.7z -o data
