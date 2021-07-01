@@ -18,4 +18,6 @@ jobs:
     - name: npm install
       run: npm install
     - name: build ttc
-      run: npx verda -f verdafile.js ttc
+      run: |
+        npm i -g verda
+        verda -f verdafile.js ttc
