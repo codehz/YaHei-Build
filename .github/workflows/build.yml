@@ -7,4 +7,4 @@ jobs:
     container: voidlinux/voidlinux:latest
     steps:
     - name: Install dependencies
-      run: xbps-install -y git nodejs otfcc ttfautohint
+      run: xbps-install -Syu git nodejs otfcc ttfautohint
