@@ -20,4 +20,4 @@ jobs:
     - name: build ttc
       run: |
         npm i -g verda
-        verda -f verdafile.js ttc
+        verda -f verdafile.js ttc || cat .build/.verda-build-journal
