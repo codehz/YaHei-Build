@@ -16,6 +16,6 @@ jobs:
         repository: be5invis/Sarasa-Gothic
         ref: "13a1edfa1cae803600a6980b1b5fa68be157c003"
     - name: npm install
-      run: npm --loglevel verbose install
+      run: npm install
     - name: build ttc
-      run: npm --loglevel verbose run build ttc
+      run: npx verda -f verdafile.js ttc
