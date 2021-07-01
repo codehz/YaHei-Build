@@ -10,3 +10,12 @@ jobs:
       run: xbps-install -Syu git nodejs otfcc ttfautohint python3-pip
     - name: Install afdko
       run: pip3 install --user afdko
+    - name: Clone sarasa gothic
+      uses: actions/checkout@v2
+      with:
+        repository: be5invis/Sarasa-Gothic
+        ref: "13a1edfa1cae803600a6980b1b5fa68be157c003"
+    - name: npm install
+      run: npm install
+    - name: build ttc
+      run: npm run build ttc
