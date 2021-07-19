@@ -7,7 +7,7 @@ jobs:
     container: archlinux:latest
     steps:
     - name: Install dependencies
-      run: pacman -Syu git fontforge wget p7zip
+      run: pacman -Syu --noconfirm git fontforge wget p7zip
     - uses: actions/checkout@v2
     - name: Download font
       run: wget -O /tmp/ttc.7z  https://github.com/be5invis/Sarasa-Gothic/releases/download/v0.32.11/sarasa-gothic-ttc-0.32.11.7z
