@@ -10,7 +10,7 @@ jobs:
       run: pacman -Syu --noconfirm git fontforge wget p7zip
     - uses: actions/checkout@v2
     - name: Download font
-      run: wget -O /tmp/ttc.7z  https://github.com/be5invis/Sarasa-Gothic/releases/download/v0.32.11/sarasa-gothic-ttc-0.32.11.7z
+      run: wget -O /tmp/ttc.7z  https://github.com/be5invis/Sarasa-Gothic/releases/download/v0.32.14/sarasa-gothic-ttc-0.32.14.7z
     - name: Extract font
       run: 7z x -odata /tmp/ttc.7z
     - name: Run script
