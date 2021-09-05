@@ -4,15 +4,15 @@ from glob import glob
 
 class TTFTask:
   def __init__(self, font, variant, ui) -> None:
-    subfamily = self.get_subfamily().strip()
     self.font = font
+    for locale, name, value in font.sfnt_names:
+      if name == "SubFamily":
+        self.variant = value
+        break
     self.variant = subfamily
     self.ui = ui
 
   def get_subfamily(self):
-    for locale, name, value in self.font.sfnt_names:
-      if name == "SubFamily":
-        return value
     return None
 
   def edit(self):
