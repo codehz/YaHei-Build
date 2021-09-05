@@ -9,7 +9,6 @@ class TTFTask:
       if name == "SubFamily":
         self.variant = value
         break
-    self.variant = subfamily
     self.ui = ui
 
   def get_subfamily(self):
