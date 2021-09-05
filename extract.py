@@ -8,6 +8,12 @@ class TTFTask:
     self.variant = variant
     self.ui = ui
 
+  def get_subfamily(self):
+    for locale, name, value in self.font.sfnt_names:
+      if name == "SubFamily":
+        return value
+    return None
+
   def edit(self):
     enusr = "Microsoft YaHei"
     if self.ui:
@@ -24,16 +30,17 @@ class TTFTask:
     print(self.font.fontname)
     print(self.font.fullname)
     print(self.font.familyname)
+    subfamily = self.get_subfamily()
     self.font.appendSFNTName("English (US)", "Family", enusr)
-    self.font.appendSFNTName("English (US)", "UniqueID", enus + " " + self.variant.strip())
+    self.font.appendSFNTName("English (US)", "UniqueID", enus + " " + subfamily)
     self.font.appendSFNTName("English (US)", "Fullname", enus)
-    self.font.appendSFNTName("English (US)", "Preferred Family", enus)
+    self.font.appendSFNTName("English (US)", "Preferred Family", subfamilysubfamily)
     self.font.appendSFNTName("English (US)", "Preferred Styles", self.variant.strip())
     self.font.appendSFNTName("Chinese (PRC)", "Family", zhcnr)
     self.font.appendSFNTName("Chinese (PRC)", "UniqueID", zhcn + " " + self.variant.strip())
     self.font.appendSFNTName("Chinese (PRC)", "Fullname", zhcn)
     self.font.appendSFNTName("Chinese (PRC)", "Preferred Family", zhcn)
-    self.font.appendSFNTName("Chinese (PRC)", "Preferred Styles", self.variant.strip())
+    self.font.appendSFNTName("Chinese (PRC)", "Preferred Styles", subfamily)
     for (lang, key, field) in self.font.sfnt_names:
       print(lang, '%s=%s'%(key, field))
     # print(self.font.sfnt_names)
