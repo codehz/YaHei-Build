@@ -4,8 +4,9 @@ from glob import glob
 
 class TTFTask:
   def __init__(self, font, variant, ui) -> None:
+    subfamily = self.get_subfamily().strip()
     self.font = font
-    self.variant = variant
+    self.variant = subfamily
     self.ui = ui
 
   def get_subfamily(self):
@@ -18,11 +19,11 @@ class TTFTask:
     enusr = "Microsoft YaHei"
     if self.ui:
       enusr = "Microsoft YaHei UI"
-    enus = enusr + self.variant
+    enus = enusr + " " + self.variant
     zhcnr = "微软雅黑"
     if self.ui:
       zhcnr = "微软雅黑 UI"
-    zhcn = zhcnr + self.variant
+    zhcn = zhcnr + " " + self.variant
     # self.font.fullname = enus
     self.font.fontname = enus.replace(" ", "-")
     self.font.fullname = enus
@@ -30,17 +31,14 @@ class TTFTask:
     print(self.font.fontname)
     print(self.font.fullname)
     print(self.font.familyname)
-    subfamily = self.get_subfamily()
     self.font.appendSFNTName("English (US)", "Family", enusr)
-    self.font.appendSFNTName("English (US)", "UniqueID", enus + " " + subfamily)
+    self.font.appendSFNTName("English (US)", "UniqueID", enus)
     self.font.appendSFNTName("English (US)", "Fullname", enus)
-    self.font.appendSFNTName("English (US)", "Preferred Family", subfamily)
-    self.font.appendSFNTName("English (US)", "Preferred Styles", self.variant.strip())
+    self.font.appendSFNTName("English (US)", "Preferred Styles", self.variant)
     self.font.appendSFNTName("Chinese (PRC)", "Family", zhcnr)
     self.font.appendSFNTName("Chinese (PRC)", "UniqueID", zhcn + " " + self.variant.strip())
     self.font.appendSFNTName("Chinese (PRC)", "Fullname", zhcn)
     self.font.appendSFNTName("Chinese (PRC)", "Preferred Family", zhcn)
-    self.font.appendSFNTName("Chinese (PRC)", "Preferred Styles", subfamily)
     for (lang, key, field) in self.font.sfnt_names:
       print(lang, '%s=%s'%(key, field))
     # print(self.font.sfnt_names)
