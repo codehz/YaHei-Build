@@ -33,9 +33,11 @@ class TTFTask:
     self.font.appendSFNTName("English (US)", "Family", enusr)
     self.font.appendSFNTName("English (US)", "UniqueID", enus)
     self.font.appendSFNTName("English (US)", "Fullname", enusr)
+    self.font.appendSFNTName("English (US)", "Preferred Family", enusr)
     self.font.appendSFNTName("Chinese (PRC)", "Family", zhcnr)
     self.font.appendSFNTName("Chinese (PRC)", "UniqueID", zhcn)
     self.font.appendSFNTName("Chinese (PRC)", "Fullname", zhcnr)
+    self.font.appendSFNTName("Chinese (PRC)", "Preferred Family", zhcnr)
     for (lang, key, field) in self.font.sfnt_names:
       print(lang, '%s=%s'%(key, field))
     # print(self.font.sfnt_names)
