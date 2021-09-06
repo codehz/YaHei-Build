@@ -6,7 +6,7 @@ class TTFTask:
   def __init__(self, font, variant, ui) -> None:
     self.font = font
     for locale, name, value in font.sfnt_names:
-      if name == "SubFamily":
+      if name == "Preferred Styles":
         self.variant = value
         break
     self.ui = ui
