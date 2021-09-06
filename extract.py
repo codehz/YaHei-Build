@@ -23,6 +23,9 @@ class TTFTask:
     if self.ui:
       zhcnr = enusr
     zhcn = zhcnr + " " + self.variant
+    if self.variant == "Regular":
+      enus = enusr
+      zhcn = zhcnr
     # self.font.fullname = enus
     self.font.fontname = enus.replace(" ", "")
     self.font.fullname = enus
