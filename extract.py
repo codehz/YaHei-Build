@@ -21,10 +21,10 @@ class TTFTask:
     enus = enusr + " " + self.variant
     zhcnr = "微软雅黑"
     if self.ui:
-      zhcnr = "微软雅黑 UI"
+      zhcnr = enusr
     zhcn = zhcnr + " " + self.variant
     # self.font.fullname = enus
-    self.font.fontname = enus.replace(" ", "-")
+    self.font.fontname = enus.replace(" ", "")
     self.font.fullname = enus
     self.font.familyname = enusr
     print(self.font.fontname)
@@ -33,11 +33,9 @@ class TTFTask:
     self.font.appendSFNTName("English (US)", "Family", enusr)
     self.font.appendSFNTName("English (US)", "UniqueID", enus)
     self.font.appendSFNTName("English (US)", "Fullname", enusr)
-    self.font.appendSFNTName("English (US)", "Preferred Styles", self.variant)
     self.font.appendSFNTName("Chinese (PRC)", "Family", zhcnr)
     self.font.appendSFNTName("Chinese (PRC)", "UniqueID", zhcn)
     self.font.appendSFNTName("Chinese (PRC)", "Fullname", zhcnr)
-    self.font.appendSFNTName("Chinese (PRC)", "Preferred Family", self.variant)
     for (lang, key, field) in self.font.sfnt_names:
       print(lang, '%s=%s'%(key, field))
     # print(self.font.sfnt_names)
