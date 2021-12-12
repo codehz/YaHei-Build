@@ -2,7 +2,7 @@ name: build msyh
 on: [push]
 
 env:
-  version: 0.35.1
+  version: 0.35.4
 
 jobs:
   build:
