@@ -2,7 +2,7 @@ name: build msyh
 on: [push]
 
 env:
-  version: 0.35.7
+  version: 0.35.8
 
 jobs:
   build:
@@ -20,8 +20,10 @@ jobs:
       run: |
         mkdir out
         python3 extract.py
+    - name: Compress font
+      run: tar --sort=name --mtime='@0' --owner=0 --group=0 --numeric-owner --format=ustar -c -I 'zstd --single-thread --ultra -22' -f out.tar.zst out
     - name: Upload
       uses: actions/upload-artifact@v2
       with:
         name: out
-        path: out
+        path: out.tar.zst
