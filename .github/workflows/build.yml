@@ -25,6 +25,7 @@ jobs:
       run: 7z x -odata /tmp/ttc.7z
     - name: Run script
       run: |
+        ls *
         mkdir out
         python3 extract.py
     - name: Compress font
