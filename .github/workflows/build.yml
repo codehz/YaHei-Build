@@ -1,8 +1,8 @@
 name: build msyh
-on: [push]
-
-env:
-  version: 0.35.8
+on:
+  push:
+  schedule:
+    - cron: '0 0 * * *'
 
 jobs:
   build:
@@ -10,10 +10,17 @@ jobs:
     container: archlinux:latest
     steps:
     - name: Install dependencies
-      run: pacman -Syu --noconfirm git fontforge wget p7zip
+      run: pacman -Syu --noconfirm git fontforge curl p7zip jq
     - uses: actions/checkout@v2
+    - name: Grab latest version
+      run: |
+        curl -L https://api.github.com/repos/be5invis/Sarasa-Gothic/releases/latest -o api.json
+        UPSTREAM_VERSION=$(cat api.json | jq -r .tag_name)
+        DOWNLOAD_URL=$(cat api.json | jq -r '.assets[] | select(.name | test("sarasa-gothic-ttf-(?!unhinted)")) | .browser_download_url')
+        echo "UPSTREAM_VERSION=$UPSTREAM_VERSION" >> $GITHUB_ENV
+        echo "DOWNLOAD_URL=$DOWNLOAD_URL" >> $GITHUB_ENV
     - name: Download font
-      run: wget -O /tmp/ttc.7z https://github.com/be5invis/Sarasa-Gothic/releases/download/v${{ env.version }}/sarasa-gothic-ttc-${{ env.version }}.7z
+      run: curl -Lvo /tmp/ttc.7z $DOWNLOAD_URL
     - name: Extract font
       run: 7z x -odata /tmp/ttc.7z
     - name: Run script
@@ -21,9 +28,19 @@ jobs:
         mkdir out
         python3 extract.py
     - name: Compress font
-      run: tar --sort=name --mtime='@0' --owner=0 --group=0 --numeric-owner --format=ustar -c -I 'zstd --single-thread --ultra -22' -f out.tar.zst out
-    - name: Upload
+      run: |
+        cd out
+        7z a ../out.zip *
+    - name: Upload artifact
       uses: actions/upload-artifact@v2
       with:
         name: out
-        path: out.tar.zst
+        path: out
+    - name: Upload release
+      uses: marvinpinto/action-automatic-releases@latest
+      with:
+        repo_token: "${{ secrets.GITHUB_TOKEN }}"
+        automatic_release_tag: "upstream-${{ env.UPSTREAM_VERSION }}"
+        prerelease: true
+        title: Nightly build
+        files: out.zip
