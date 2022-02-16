@@ -16,7 +16,7 @@ jobs:
       run: |
         curl -L https://api.github.com/repos/be5invis/Sarasa-Gothic/releases/latest -o api.json
         UPSTREAM_VERSION=$(cat api.json | jq -r .tag_name)
-        DOWNLOAD_URL=$(cat api.json | jq -r '.assets[] | select(.name | test("sarasa-gothic-ttf-(?!unhinted)")) | .browser_download_url')
+        DOWNLOAD_URL=$(cat api.json | jq -r '.assets[] | select(.name | test("sarasa-gothic-ttc-(?!unhinted)")) | .browser_download_url')
         echo "UPSTREAM_VERSION=$UPSTREAM_VERSION" >> $GITHUB_ENV
         echo "DOWNLOAD_URL=$DOWNLOAD_URL" >> $GITHUB_ENV
     - name: Download font
@@ -25,7 +25,6 @@ jobs:
       run: 7z x -odata /tmp/ttc.7z
     - name: Run script
       run: |
-        ls *
         mkdir out
         python3 extract.py
     - name: Compress font
